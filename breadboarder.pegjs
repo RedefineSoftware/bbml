@@ -2,10 +2,7 @@ File = all:BBML+ {
     return all.filter(expr => expr); 
 }
 
-BBML = 
-    Comment
-    / Screen
-    / NewLine {}
+BBML =  Comment / Screen / NewLine {}
 
 Screen = "screen" _ name: ScreenName _ "{" __ items: ScreenItems __ "}" { 
     return { 
@@ -64,8 +61,21 @@ GoTo = "goto" _ destination: ScreenName {
     };
 }
 
-IfStatement = "if" _ condition: String _ "{" __ items: ScreenItems __ "}" __ ElseStatement*
-ElseStatement = "else" _ "{" __ items: ScreenItems __ "}"
+IfStatement = "if" _ condition: String _ "{" __ ifItems: ScreenItems __ "}" __ elseStmt:(ElseStatement)* { 
+    const [ firstElse ] = elseStmt || [];
+    return { 
+        type: "conditional", 
+        condition,
+        ifItems, 
+        elseItems: firstElse ? firstElse.items : undefined
+    };
+}
+
+ElseStatement = "else" _ "{" __ items: ScreenItems __ "}" { 
+    return { 
+        items 
+    };
+}
 
 // Utilities
 Name = [a-zA-Z_][a-zA-Z_0-9]* { return text(); }
