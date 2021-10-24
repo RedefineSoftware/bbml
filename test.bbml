@@ -1,0 +1,38 @@
+screen Login {
+  field "Username: "
+  field "Password: "
+  button "Log In" -> Main
+}
+
+screen Main {
+  button "Go to Profile" -> Profile
+  button "Log Out" -> Login
+}
+
+screen Profile {
+  label "This is some sample text that should go on this screen"
+  button "Go to Main" -> Main
+}
+
+screen LeadsAndTraffic {
+  button "Lead Summary" -> LeadDetails
+}
+
+screen LeadDetails {
+  component "Lead Summary"
+  component "Lead Info from XML"
+
+  if "Lead has potential duplicates" {
+    button "Process Lead" -> ProcessLead
+  } else {
+    button "Process Lead" -> SelectPotentialCustomer
+  }
+}
+
+screen SelectPotentialCustomer {
+
+}
+
+screen ProcessLead {
+  goto SelectPotentialCustomer
+}
