@@ -1,16 +1,16 @@
 {
-  "name": "breadboarder",
+  "name": "bbml",
   "version": "1.0.0",
-  "description": "",
+  "description": "Breadboard Markup Language",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npm run build && node parser",
+    "build": "peggy bbml.peggy"
   },
   "keywords": [],
-  "author": "",
+  "author": "Chris Rabl",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^16.11.4",
-    "pegjs": "^0.10.0"
+    "@types/node": "^16.11.4"
   }
 }
