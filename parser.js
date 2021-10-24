@@ -1,4 +1,4 @@
-const bbml = require('./breadboarder');
+const bbml = require('./bbml');
 const fs = require('fs');
 
 const file = fs.readFileSync('./test.bbml', 'utf-8');
