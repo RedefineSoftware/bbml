@@ -47,10 +47,12 @@ Field = "field" _ label: String {
     };
 }
 
-Component = "component" _ label: String { 
+// TODO: Figure out how components are going to work, and maybe use ComponentName instead of String
+// ComponentName = Name
+Component = "component" _ name: String { 
     return { 
         type: "component", 
-        label 
+        name 
     };
 }
 
@@ -84,10 +86,22 @@ ElseStatement = "else" _ "{" __ items: ScreenItems __ "}" {
     };
 }
 
+Comment = _ "//" _ value:LineOfText { 
+    return { 
+        type: "comment", 
+        value 
+    }; 
+}
+
 // Utilities
-Name = [a-zA-Z_][a-zA-Z_0-9]* { return text(); }
-String = '"' content:[^"\n\r]* '"' { return content.join(""); }
-Comment = _ "//" _ value:LineOfText { return { type: "comment", value }; }
+Name = [a-zA-Z_][a-zA-Z_0-9]* { 
+    return text(); 
+}
+
+String = '"' content:[^"\n\r]* '"' { 
+    return content.join(""); 
+}
+
 LineOfText = text:$([^\n\r]*)
 EOL = NewLine / (Comment NewLine) / EOF
 NewLine = '\n' / '\r' '\n'
