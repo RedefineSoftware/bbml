@@ -20,7 +20,7 @@ ScreenItem =
     / Field
     / Component
     / GoTo
-    / IfStatement
+    / Conditional
     / Comment
 
 Button = "button" _ label: ButtonLabel _ "->" _ destination: ScreenName { 
@@ -61,7 +61,7 @@ GoTo = "goto" _ destination: ScreenName {
     };
 }
 
-IfStatement = "if" _ condition: String _ "{" __ ifItems: ScreenItems __ "}" __ elseStmt:(ElseStatement)* { 
+Conditional = "if" _ condition: String _ "{" __ ifItems: ScreenItems __ "}" __ elseStmt:(ElseStatement)* { 
     const [ firstElse ] = elseStmt || [];
     return { 
         type: "conditional", 

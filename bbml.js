@@ -604,7 +604,7 @@ function peg$parse(input, options) {
           if (s0 === peg$FAILED) {
             s0 = peg$parseGoTo();
             if (s0 === peg$FAILED) {
-              s0 = peg$parseIfStatement();
+              s0 = peg$parseConditional();
               if (s0 === peg$FAILED) {
                 s0 = peg$parseComment();
               }
@@ -782,7 +782,7 @@ function peg$parse(input, options) {
     return s0;
   }
 
-  function peg$parseIfStatement() {
+  function peg$parseConditional() {
     var s0, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, s12;
 
     s0 = peg$currPos;
