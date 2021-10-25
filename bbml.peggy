@@ -61,14 +61,21 @@ GoTo = "goto" _ destination: ScreenName {
     };
 }
 
-Conditional = "if" _ condition: String _ "{" __ ifItems: ScreenItems __ "}" __ elseStmt:(ElseStatement)* { 
+Conditional = ifStmt: IfStatement __ elseStmt:(ElseStatement)* { 
     const [ firstElse ] = elseStmt || [];
     return { 
         type: "conditional", 
-        condition,
-        ifItems, 
+        condition: ifStmt.condition,
+        ifItems: ifStmt.items, 
         elseItems: firstElse ? firstElse.items : undefined
     };
+}
+
+IfStatement = "if" _ condition: String _ "{" __ items: ScreenItems __ "}" {
+    return {
+        condition,
+        items
+    }
 }
 
 ElseStatement = "else" _ "{" __ items: ScreenItems __ "}" { 

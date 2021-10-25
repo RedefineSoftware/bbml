@@ -30,7 +30,9 @@ screen LeadDetails {
 }
 
 screen SelectPotentialCustomer {
-
+  if "If statement without an Else" {
+    button "Do something" -> Main
+  }
 }
 
 screen ProcessLead {
