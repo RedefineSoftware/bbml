@@ -1,7 +1,15 @@
 screen Login {
   field "Username: "
   field "Password: "
-  button "Log In" -> Main
+  vstack {
+    button "Log In" -> Main
+    button "Reset Password" -> Main
+
+    hstack {
+      label "Test"
+      label "another test"
+    }
+  }
 }
 
 screen Main {

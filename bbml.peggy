@@ -12,6 +12,20 @@ Screen = "screen" _ name: ScreenName _ "{" __ items: ScreenItems __ "}" {
     };
 }
 
+VStack = "vstack" _ "{" __ items: ScreenItems __ "}" { 
+    return { 
+        type: "vstack",
+        items: items || [] 
+    };
+}
+
+HStack = "hstack" _ "{" __ items: ScreenItems __ "}" { 
+    return { 
+        type: "hstack",
+        items: items || [] 
+    };
+}
+
 ScreenName =  Name
 ScreenItems = (head:ScreenItem tail:(EOL __ item:ScreenItem { return item; })* { return [head, ...tail]; })?
 ScreenItem = 
@@ -22,6 +36,8 @@ ScreenItem =
     / GoTo
     / Conditional
     / Comment
+    / VStack
+    / HStack
 
 Button = "button" _ label: ButtonLabel _ "->" _ destination: ScreenName { 
     return { 
